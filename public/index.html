@@ -1,1 +1,23 @@
-Sample Test File over Golang http.FileServer
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>平均値と分布</title></head>
+<body>
+<h1>平均値 & 10点刻み分布</h1>
+
+得点（カンマ区切り）:<br>
+<textarea id="scores" rows="4" cols="40"></textarea><br><br>
+
+<button onclick="calc()">計算</button>
+<pre id="result"></pre>
+
+<script>
+function calc() {
+    let s = document.getElementById("scores").value;
+
+    fetch(`/api/average?scores=${encodeURIComponent(s)}`)
+        .then(res => res.text())
+        .then(text => document.getElementById("result").innerText = text);
+}
+</script>
+</body>
+</html>
